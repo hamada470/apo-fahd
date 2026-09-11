@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مقاول ترميم حمامات ومطابخ</title>
+    <title>ترميم حمامات ومطابخ</title>
     <!-- مكتبة FontAwesome لأيقونات الواتساب والهاتف -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #e65100; /* لون برتقالي دافئ مناسب للمقاولات والترميم */
-            --primary-dark: #b23c00;
-            --secondary-color: #212121;
-            --bg-color: #f4f5f7;
+            --primary-color: #d49a37; /* لون ذهبي/بني مستوحي من الشعار */
+            --primary-dark: #b88226;
+            --secondary-color: #112233; /* لون كحلي/أزرق داكن من الشعار */
+            --bg-color: #f8f9fa;
             --card-bg: #ffffff;
             --whatsapp-color: #25d366;
         }
@@ -26,8 +26,23 @@
         body {
             background-color: var(--bg-color);
             color: #333;
-            padding-top: 70px; /* مسافة أعلى لكي لا يختفي المحتوى خلف الهيدر الثابت */
-            padding-bottom: 80px;
+            padding-top: 75px;
+            padding-bottom: 90px;
+        }
+
+        /* أنيميشن الاهتزاز الخفيف مستمر */
+        @keyframes subtleShake {
+            0% { transform: scale(1) rotate(0deg); }
+            20% { transform: scale(1.05) rotate(-3deg); }
+            30% { transform: scale(1.05) rotate(3deg); }
+            40% { transform: scale(1.05) rotate(-3deg); }
+            50% { transform: scale(1.05) rotate(3deg); }
+            60% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .shake-effect {
+            animation: subtleShake 3s infinite ease-in-out;
         }
 
         /* 1. الشريط العلوي الثابت */
@@ -36,14 +51,28 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 65px;
+            height: 70px;
             background-color: var(--secondary-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             z-index: 1000;
+        }
+
+        .header-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
         }
 
         .header-title {
@@ -56,36 +85,44 @@
             background-color: var(--primary-color);
             color: #fff;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 5px;
+            padding: 9px 18px;
+            border-radius: 25px;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
         }
 
-        .header-call-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        /* الهيرو / البانر الرئيسي */
+        /* القسم الرئيسي للشعار */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80') center/cover;
+            background-color: var(--secondary-color);
             color: white;
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             margin-bottom: 30px;
         }
 
+        .main-logo {
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
         .hero h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
+            color: #fff;
         }
 
         .hero p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: var(--primary-color);
+            font-weight: bold;
         }
 
         /* 2. شبكة الأقسام الستة */
@@ -104,67 +141,53 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .service-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .service-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border: 1px solid #eee;
+            border-top: 4px solid var(--primary-color);
         }
 
         .service-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--secondary-color);
         }
 
         .service-content p {
-            color: #666;
+            color: #555;
             font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .card-call-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
-            padding: 10px;
-            background-color: var(--primary-color);
+            padding: 12px;
+            background-color: var(--secondary-color);
             color: white;
             text-align: center;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
             transition: background 0.3s;
         }
 
         .card-call-btn:hover {
-            background-color: var(--primary-dark);
+            background-color: var(--primary-color);
         }
 
         /* 3. الأزرار العائمة */
@@ -174,26 +197,21 @@
             left: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
             z-index: 1000;
         }
 
         .float-btn {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 26px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             text-decoration: none;
-            transition: transform 0.3s;
-        }
-
-        .float-btn:hover {
-            transform: scale(1.1);
         }
 
         .float-whatsapp {
@@ -207,108 +225,106 @@
 </head>
 <body>
 
-    <!-- 1. زر اتصال ثابت في أعلى الشاشة -->
+    <!-- الشريط العلوي الثابت مع زر اتصال يهتز -->
     <header>
-        <div class="header-title">مقاول ترميم حمامات ومطابخ</div>
-        <a href="tel:0562651639" class="header-call-btn">
+        <div class="header-logo-container">
+            <img src="m3.jpg" alt="شعار مقاول ترميم" class="header-logo">
+            <div class="header-title">ترميم حمامات ومطابخ</div>
+        </div>
+        <a href="tel:0562651639" class="header-call-btn shake-effect">
             <i class="fa-solid fa-phone"></i> اتصل الآن
         </a>
     </header>
 
-    <!-- البانر الترحيبي -->
+    <!-- القسم الرئيسي يعرض الشعار الوحيد فقط -->
     <section class="hero">
-        <h1>خدمات ترميم وتسليم مفتاح</h1>
-        <p>متخصصون في صيانة وترميم الحمامات والمطابخ بأعلى جودة وأفضل الأسعار</p>
+        <img src="m3.jpg" alt="ترميم حمامات ومطابخ" class="main-logo">
+        <h1>متخصصون في ترميم الحمامات والمطابخ</h1>
+        <p>0562651639</p>
     </section>
 
-    <!-- 2. ستة أقسام رئيسية -->
+    <!-- الأقسام الستة -->
     <main class="container">
         <h2 class="section-title">خدماتنا</h2>
         <div class="services-grid">
 
             <!-- القسم 1 -->
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500&q=80" alt="ترميم حمامات" class="service-img">
                 <div class="service-content">
-                    <div>
-                        <h3>1. ترميم حمامات بالكامل</h3>
-                        <p>تكسير، تجديد السباكة، وتغيير السيراميك والتعزيل الكامل بأحدث المواد لمنع التسربات.</p>
-                    </div>
-                    <a href="tel:0562651639" class="card-call-btn"><i class="fa-solid fa-phone"></i> إتصل الآن</a>
+                    <h3>1. ترميم حمامات بالكامل</h3>
+                    <p>تكسير، تجديد السباكة، تغيير السيراميك، والعزل المائي الشامل لمنع التسربات.</p>
                 </div>
+                <a href="tel:0562651639" class="card-call-btn">
+                    <i class="fa-solid fa-phone"></i> اتصل الآن
+                </a>
             </div>
 
             <!-- القسم 2 -->
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=500&q=80" alt="ترميم مطابخ" class="service-img">
                 <div class="service-content">
-                    <div>
-                        <h3>2. ترميم وتجديد المطابخ</h3>
-                        <p>تجديد شامل لتمديدات السباكة والكهرباء وتنسيق الأرضيات لتقديم مطبخ مدروس وعصري.</p>
-                    </div>
-                    <a href="tel:0562651639" class="card-call-btn"><i class="fa-solid fa-phone"></i> إتصل الآن</a>
+                    <h3>2. ترميم وتجديد المطابخ</h3>
+                    <p>تجديد وتعديل خطوط السباكة والكهرباء وتحديث الأرضيات والجدران بأحدث التصاميم.</p>
                 </div>
+                <a href="tel:0562651639" class="card-call-btn">
+                    <i class="fa-solid fa-phone"></i> اتصل الآن
+                </a>
             </div>
 
             <!-- القسم 3 -->
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=500&q=80" alt="عزل مائي" class="service-img">
                 <div class="service-content">
-                    <div>
-                        <h3>3. العزل المائي للأسطح والأرضيات</h3>
-                        <p>عزل مائي وحراري متكامل للحمامات والمطابخ بأجود المواد لمنع التسربات المستقبلية.</p>
-                    </div>
-                    <a href="tel:0562651639" class="card-call-btn"><i class="fa-solid fa-phone"></i> إتصل الآن</a>
+                    <h3>3. العزل المائي للأسطح والأرضيات</h3>
+                    <p>عزل مائي وحراري متكامل للحمامات والمطابخ لمنع التسربات بأجود المواد الضامنة.</p>
                 </div>
+                <a href="tel:0562651639" class="card-call-btn">
+                    <i class="fa-solid fa-phone"></i> اتصل الآن
+                </a>
             </div>
 
             <!-- القسم 4 -->
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=500&q=80" alt="تركيب سيراميك" class="service-img">
                 <div class="service-content">
-                    <div>
-                        <h3>4. تركيب السيراميك والبورسلين</h3>
-                        <p>تنفيد أعمال تركيب السيراميك والبورسلين والرخام للذكور والأرضيات بدقة احترافية عالية.</p>
-                    </div>
-                    <a href="tel:0562651639" class="card-call-btn"><i class="fa-solid fa-phone"></i> إتصل الآن</a>
+                    <h3>4. تركيب السيراميك والبورسلين</h3>
+                    <p>تنفيذ أعمال تركيب السيراميك والبورسلين والرخام للتقسيمات والأرضيات بإتقان عالي.</p>
                 </div>
+                <a href="tel:0562651639" class="card-call-btn">
+                    <i class="fa-solid fa-phone"></i> اتصل الآن
+                </a>
             </div>
 
             <!-- القسم 5 -->
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="أعمال سباكة" class="service-img">
                 <div class="service-content">
-                    <div>
-                        <h3>5. تأسيس وصيانة السباكة</h3>
-                        <p>صيانة وتغيير شبكات السباكة الداخلية والتجهيزات الصحية بالكامل مع الضمان.</p>
-                    </div>
-                    <a href="tel:0562651639" class="card-call-btn"><i class="fa-solid fa-phone"></i> إتصل الآن</a>
+                    <h3>5. تأسيس وصيانة السباكة</h3>
+                    <p>صيانة وشبكات السباكة الحديثة وتغيير التجهيزات والخطوط الداخلية بالكامل.</p>
                 </div>
+                <a href="tel:0562651639" class="card-call-btn">
+                    <i class="fa-solid fa-phone"></i> اتصل الآن
+                </a>
             </div>
 
             <!-- القسم 6 -->
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=500&q=80" alt="تشطيبات وديكور" class="service-img">
                 <div class="service-content">
-                    <div>
-                        <h3>6. تشطيبات وديكورات حديثة</h3>
-                        <p>تركيب الجبس بورد وإضاءات الممر وأرضيات المطابخ والحمامات لتصميم حديث ومتكامل.</p>
-                    </div>
-                    <a href="tel:0562651639" class="card-call-btn"><i class="fa-solid fa-phone"></i> إتصل الآن</a>
+                    <h3>6. تشطيبات وديكورات حديثة</h3>
+                    <p>تنفيذ ديكورات جدارية وسقفية، إضاءات حديثة، ولمسات جمالية للحمامات والمطابخ.</p>
                 </div>
+                <a href="tel:0562651639" class="card-call-btn">
+                    <i class="fa-solid fa-phone"></i> اتصل الآن
+                </a>
             </div>
 
         </div>
     </main>
 
-    <!-- 3. الأزرار العائمة (واتساب + اتصال) -->
+    <!-- الأزرار العائمة (واتساب + اتصال) مع اهتزاز خفيف مستمر -->
     <div class="floating-buttons">
-        <!-- زر الواتساب العائم بآيقونة الواتساب الرسمية -->
-        <a href="https://wa.me/966562651639" class="float-btn float-whatsapp" target="_blank" title="تواصل عبر الواتساب">
+        <!-- زر الواتساب العائم -->
+        <a href="https://wa.me/966562651639" class="float-btn float-whatsapp shake-effect" target="_blank" title="تواصل عبر الواتساب">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
         <!-- زر الاتصال العائم -->
-        <a href="tel:0562651639" class="float-btn float-call" title="اتصال تلفوني">
+        <a href="tel:0562651639" class="float-btn float-call shake-effect" title="اتصال تلفوني">
             <i class="fa-solid fa-phone"></i>
         </a>
     </div>
