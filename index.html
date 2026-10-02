@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ترميم حمامات ومطابخ</title>
-    <!-- مكتبة FontAwesome لأيقونات الواتساب والهاتف -->
+    <title>دليل وشبكة خدمات تركيب السيراميك والبورسلان والرخام والمغاسل</title>
+    <meta name="description" content="الموسوعة الشاملة لأعمال التبليط، تركيب البورسلين، الرخام الطبيعي والصناعي، تفصيل المغاسل، الواجهات، والسلالم.">
+    <!-- FontAwesome للايقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #d49a37; /* لون ذهبي/بني مستوحي من الشعار */
-            --primary-dark: #b88226;
-            --secondary-color: #112233; /* لون كحلي/أزرق داكن من الشعار */
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #d69e2e;
             --whatsapp-color: #25d366;
+            --phone-color: #007bff;
+            --bg-color: #f7fafc;
+            --text-color: #2d3748;
+            --card-bg: #ffffff;
+            --tag-bg: #edf2f7;
         }
 
         * {
@@ -25,309 +29,702 @@
 
         body {
             background-color: var(--bg-color);
-            color: #333;
-            padding-top: 75px;
-            padding-bottom: 90px;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 70px; /* مسافة لشريط الاتصال الثابت */
         }
 
-        /* أنيميشن الاهتزاز الخفيف مستمر */
-        @keyframes subtleShake {
-            0% { transform: scale(1) rotate(0deg); }
-            20% { transform: scale(1.05) rotate(-3deg); }
-            30% { transform: scale(1.05) rotate(3deg); }
-            40% { transform: scale(1.05) rotate(-3deg); }
-            50% { transform: scale(1.05) rotate(3deg); }
-            60% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-
-        .shake-effect {
-            animation: subtleShake 3s infinite ease-in-out;
-        }
-
-        /* 1. الشريط العلوي الثابت */
-        header {
-            position: fixed;
+        /* --- شريط التنقل العلوي (Navbar) --- */
+        .navbar {
+            background-color: var(--primary-color);
+            color: white;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            background-color: var(--secondary-color);
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
+            padding: 0.8rem 1rem;
         }
 
-        .header-logo-container {
+        .brand-logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .header-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary-color);
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            align-items: center;
         }
 
-        .header-title {
-            color: #ffffff;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .header-call-btn {
-            background-color: var(--primary-color);
-            color: #fff;
+        .nav-menu a {
+            color: white;
             text-decoration: none;
-            padding: 9px 18px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+
+        /* أزرار الاتصال الهيدر */
+        .header-cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-call, .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.7rem 1.4rem;
             border-radius: 25px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-        }
-
-        /* القسم الرئيسي للشعار */
-        .hero {
-            background-color: var(--secondary-color);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            margin-bottom: 30px;
-        }
-
-        .main-logo {
-            width: 230px;
-            height: 230px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .hero h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        /* 2. شبكة الأقسام الستة */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-            color: var(--secondary-color);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .service-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #eee;
-            border-top: 4px solid var(--primary-color);
-        }
-
-        .service-content h3 {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            color: var(--secondary-color);
-        }
-
-        .service-content p {
-            color: #555;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
             font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
         }
 
-        .card-call-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+        .btn-call {
+            background-color: #ffffff;
+            color: var(--primary-color);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-color);
+            color: white;
+        }
+
+        .btn-call:hover, .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* --- Content Container --- */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .search-box {
             width: 100%;
-            padding: 12px;
+            max-width: 600px;
+            padding: 0.9rem 1.2rem;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 25px;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .grid-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .section-card h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 0.5rem;
+        }
+
+        .articles-list {
+            list-style: none;
+        }
+
+        .articles-list li {
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-right: 1.2rem;
+        }
+
+        .articles-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            right: 0;
+            top: -2px;
+        }
+
+        .articles-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .articles-list a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Footer Keywords Cloud Section */
+        .seo-keywords-section {
+            background-color: #ffffff;
+            border-top: 2px solid #e2e8f0;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .seo-keywords-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .seo-keywords-section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .keywords-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .keyword-tag {
+            background-color: var(--tag-bg);
+            color: var(--text-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            border: 1px solid #cbd5e0;
+            transition: all 0.2s ease;
+        }
+
+        .keyword-tag:hover {
             background-color: var(--secondary-color);
+            color: #ffffff;
+            border-color: var(--secondary-color);
+        }
+
+        footer {
+            background-color: var(--primary-color);
             color: white;
             text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background 0.3s;
+            padding: 1.5rem 1rem;
+            font-size: 0.9rem;
         }
 
-        .card-call-btn:hover {
-            background-color: var(--primary-color);
-        }
-
-        /* 3. الأزرار العائمة */
-        .floating-buttons {
+        /* --- شريط الاتصال السريع الثابت أسفل الشاشة (Floating Sticky Bar) --- */
+        .fixed-bottom-bar {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .float-btn {
-            width: 60px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             height: 60px;
-            border-radius: 50%;
+            background-color: #ffffff;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 26px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            text-decoration: none;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 2000;
         }
 
-        .float-whatsapp {
+        .bar-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .bar-btn.phone {
+            background-color: var(--phone-color);
+        }
+
+        .bar-btn.whatsapp {
             background-color: var(--whatsapp-color);
         }
 
-        .float-call {
-            background-color: var(--primary-color);
+        /* --- التجاوب مع الهواتف --- */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .grid-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 1rem 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي الثابت مع زر اتصال يهتز -->
-    <header>
-        <div class="header-logo-container">
-            <img src="m3.jpg" alt="شعار مقاول ترميم" class="header-logo">
-            <div class="header-title">ترميم حمامات ومطابخ</div>
+    <!-- شريط القائمة العلوي -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo"><i class="fa-solid fa-layer-group"></i> دليل خدمات السيراميك والرخام</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#sectionsContainer">الخدمات والأقسام</a></li>
+                <li><a href="#seoTags">الكلمات المفتاحية</a></li>
+                <li><a href="tel:0500000000"><i class="fa-solid fa-phone"></i> اتصل بنا</a></li>
+                <li><a href="https://wa.me/966500000000" target="_blank"><i class="fa-brands fa-whatsapp"></i> واتساب</a></li>
+            </ul>
         </div>
-        <a href="tel:0562651639" class="header-call-btn shake-effect">
-            <i class="fa-solid fa-phone"></i> اتصل الآن
-        </a>
+    </nav>
+
+    <!-- الهيدر الرئيس -->
+    <header>
+        <h1>دليل وخدمات تركيب السيراميك والبورسلان والرخام</h1>
+        <p>الموسوعة الشاملة لأعمال التبليط، المغاسل، الواجهات، والسلالم</p>
+        
+        <!-- أزرار التواصل السريع في الهيدر -->
+        <div class="header-cta-btns">
+            <!-- استبدل الرقم برقمك -->
+            <a href="tel:0500000000" class="btn-call"><i class="fa-solid fa-phone"></i> اتصل بالمقاول الان</a>
+            <a href="https://wa.me/966500000000?text=السلام%20عليكم،%20استفسر%20عن%20خدمات%20التركيب" target="_blank" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> تواصل عبر الواتساب</a>
+        </div>
     </header>
 
-    <!-- القسم الرئيسي يعرض الشعار الوحيد فقط -->
-    <section class="hero">
-        <img src="m3.jpg" alt="ترميم حمامات ومطابخ" class="main-logo">
-        <h1>متخصصون في ترميم الحمامات والمطابخ</h1>
-        <p>0562651639</p>
-    </section>
+    <div class="container">
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن مقال أو خدمة..." onkeyup="filterArticles()">
+        </div>
 
-    <!-- الأقسام الستة -->
-    <main class="container">
-        <h2 class="section-title">خدماتنا</h2>
-        <div class="services-grid">
+        <div class="grid-sections" id="sectionsContainer">
 
             <!-- القسم 1 -->
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>1. ترميم حمامات بالكامل</h3>
-                    <p>تكسير، تجديد السباكة، تغيير السيراميك، والعزل المائي الشامل لمنع التسربات.</p>
-                </div>
-                <a href="tel:0562651639" class="card-call-btn">
-                    <i class="fa-solid fa-phone"></i> اتصل الآن
-                </a>
+            <div class="section-card" id="sec1">
+                <h2>1. تركيب السيراميك</h2>
+                <ul class="articles-list">
+                    <li><a href="#">معلم تركيب سيراميك بالرياض (دليل الخدمات)</a></li>
+                    <li><a href="#">طريقة تركيب سيراميك الأرضيات خطوة بخطوة</a></li>
+                    <li><a href="#">كيفية تركيب سيراميك الجدران للمطابخ والحمامات</a></li>
+                    <li><a href="#">أفضل أنواع الغراء لتركيب السيراميك</a></li>
+                    <li><a href="#">مقاسات السيراميك المختلفة وكيفية اختيار المناسب</a></li>
+                    <li><a href="#">طريقة معالجة وترويب فواصل السيراميك</a></li>
+                    <li><a href="#">خطوات تركيب السيراميك فوق السيراميك القديم</a></li>
+                    <li><a href="#">نصائح تفادي تطبيل واقتلاع السيراميك</a></li>
+                    <li><a href="#">الفرق بين السيراميك المطفأ (المات) واللامع</a></li>
+                    <li><a href="#">اسعار تركيب السيراميك وتكلفة المصنعية</a></li>
+                </ul>
             </div>
 
             <!-- القسم 2 -->
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>2. ترميم وتجديد المطابخ</h3>
-                    <p>تجديد وتعديل خطوط السباكة والكهرباء وتحديث الأرضيات والجدران بأحدث التصاميم.</p>
-                </div>
-                <a href="tel:0562651639" class="card-call-btn">
-                    <i class="fa-solid fa-phone"></i> اتصل الآن
-                </a>
+            <div class="section-card" id="sec2">
+                <h2>2. تركيب البورسلان</h2>
+                <ul class="articles-list">
+                    <li><a href="#">دليل تركيب البورسلان الكبير (Slabs)</a></li>
+                    <li><a href="#">أفضل أنواع غراء البورسلان المقاوم للحرارة والرطوبة</a></li>
+                    <li><a href="#">الفرق بين تركيب البورسلان بالغراء والمونة الأسمنتية</a></li>
+                    <li><a href="#">أهمية استخدام كليبسات وصليبات التبليط للبورسلان</a></li>
+                    <li><a href="#">طرق قص البورسلين بدون كسر أو تشطيب حواف</a></li>
+                    <li><a href="#">كيفية تفادي تقوس ألواح البورسلان أثناء التركيب</a></li>
+                    <li><a href="#">تركيب بورسلان الأحواش والمساحات الخارجية</a></li>
+                    <li><a href="#">خطوات تركيب بورسلان الجدران بارتفاعات عالية</a></li>
+                    <li><a href="#">تنظيف وإزالة أثر الغراء عن البورسلان بعد التركيب</a></li>
+                    <li><a href="#">مقارنة بين البورسلان الإسباني والهندي والصيني</a></li>
+                </ul>
             </div>
 
             <!-- القسم 3 -->
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>3. العزل المائي للأسطح والأرضيات</h3>
-                    <p>عزل مائي وحراري متكامل للحمامات والمطابخ لمنع التسربات بأجود المواد الضامنة.</p>
-                </div>
-                <a href="tel:0562651639" class="card-call-btn">
-                    <i class="fa-solid fa-phone"></i> اتصل الآن
-                </a>
+            <div class="section-card" id="sec3">
+                <h2>3. تركيب البلاط والمتداخل</h2>
+                <ul class="articles-list">
+                    <li><a href="#">تركيب بلاط الحوش والممرات الخارجية</a></li>
+                    <li><a href="#">كيفية تركيب بلاط الإنترلوك للحدائق والكراجات</a></li>
+                    <li><a href="#">تركيب بلاط الموزاييك للمسابح والأرضيات</a></li>
+                    <li><a href="#">خطوات تأسيس دكة الأرضية قبل تركيب البلاط</a></li>
+                    <li><a href="#">طريقة تركيب بلاط الأسطح وعزل الرطوبة</a></li>
+                    <li><a href="#">كيفية معالجة ميول الأرضيات في تركيب البلاط</a></li>
+                    <li><a href="#">تركيب البلاط الشعبي والمتداخل للمشاريع</a></li>
+                    <li><a href="#">صيانة وإصلاح البلاط المكسور أو المتحرك</a></li>
+                    <li><a href="#">اختيار أفضل أنواع البلاط المقاوم للاحتكاك</a></li>
+                    <li><a href="#">نصائح اختيار بلاط أسطح المبانى والملاحق</a></li>
+                </ul>
             </div>
 
             <!-- القسم 4 -->
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>4. تركيب السيراميك والبورسلين</h3>
-                    <p>تنفيذ أعمال تركيب السيراميك والبورسلين والرخام للتقسيمات والأرضيات بإتقان عالي.</p>
-                </div>
-                <a href="tel:0562651639" class="card-call-btn">
-                    <i class="fa-solid fa-phone"></i> اتصل الآن
-                </a>
+            <div class="section-card" id="sec4">
+                <h2>4. تفصيل وتصنيع مغاسل الرخام</h2>
+                <ul class="articles-list">
+                    <li><a href="#">تصاميم مغاسل رخام مودرن للمجالس والصالات</a></li>
+                    <li><a href="#">كيفية تفصيل مغاسل رخام مفصلة حسب الطلب</a></li>
+                    <li><a href="#">الفرق بين المغاسل الرخامية المعلقة والأرضية</a></li>
+                    <li><a href="#">تركيب مرايا مغاسل الرخام المزودة بـ LED</a></li>
+                    <li><a href="#">تفصيل مغاسل رخام مزدوجة للحمامات الرئيسية</a></li>
+                    <li><a href="#">حفر التصريف المائل في مغاسل الرخام</a></li>
+                    <li><a href="#">اختيار أحواض المغاسل المخفية والظاهرة</a></li>
+                    <li><a href="#">أحدث أشكال مغاسل الرخام مع الخشب والاستيل</a></li>
+                    <li><a href="#">خطوات تثبيت وحمل مغاسل الرخام الثقيلة بأمان</a></li>
+                    <li><a href="#">تكلفة تفصيل مغاسل الرخام وكيفية حساب المتر</a></li>
+                </ul>
             </div>
 
             <!-- القسم 5 -->
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>5. تأسيس وصيانة السباكة</h3>
-                    <p>صيانة وشبكات السباكة الحديثة وتغيير التجهيزات والخطوط الداخلية بالكامل.</p>
-                </div>
-                <a href="tel:0562651639" class="card-call-btn">
-                    <i class="fa-solid fa-phone"></i> اتصل الآن
-                </a>
+            <div class="section-card" id="sec5">
+                <h2>5. مغاسل الرخام الطبيعي</h2>
+                <ul class="articles-list">
+                    <li><a href="#">مميزات وعيوب استخدام الرخام الطبيعي في المغاسل</a></li>
+                    <li><a href="#">أفضل أنواع الرخام الطبيعي للمغاسل (كريما مارفل، موغلا)</a></li>
+                    <li><a href="#">كيفية العناية بمغاسل الرخام الطبيعي منعاً للبقع</a></li>
+                    <li><a href="#">طريقة عزل الرخام الطبيعي بالمواد المقاومة للزيوت والماء</a></li>
+                    <li><a href="#">عروق الرخام الطبيعي وتنسيقها في تصميم المغسلة (Bookmatch)</a></li>
+                    <li><a href="#">معالجة خدوش وتآكل سطوح مغاسل الرخام الطبيعي</a></li>
+                    <li><a href="#">الفرق بين الرخام الطبيعي الإيطالي والتركي واليوناني</a></li>
+                    <li><a href="#">كيفية اختيار الرخام الطبيعي المقاوم للأحماض والمنظفات</a></li>
+                    <li><a href="#">طرق جلي وتلميع مغاسل الرخام الطبيعي في المنزل</a></li>
+                    <li><a href="#">أفخم ديكورات مغاسل الرخام الطبيعي للفيلا والمجالس</a></li>
+                </ul>
             </div>
 
             <!-- القسم 6 -->
-            <div class="service-card">
-                <div class="service-content">
-                    <h3>6. تشطيبات وديكورات حديثة</h3>
-                    <p>تنفيذ ديكورات جدارية وسقفية، إضاءات حديثة، ولمسات جمالية للحمامات والمطابخ.</p>
-                </div>
-                <a href="tel:0562651639" class="card-call-btn">
-                    <i class="fa-solid fa-phone"></i> اتصل الآن
-                </a>
+            <div class="section-card" id="sec6">
+                <h2>6. مغاسل الرخام الصناعي</h2>
+                <ul class="articles-list">
+                    <li><a href="#">دليل مغاسل الرخام الصناعي (الكوريان والكوارتز)</a></li>
+                    <li><a href="#">مميزات مغاسل الرخام الصناعي المقاومة للبكتيريا والماء</a></li>
+                    <li><a href="#">الفرق بين الرخام الصناعي المصبوب والألواح</a></li>
+                    <li><a href="#">إمكانية تشكيل الرخام الصناعي بدون فواصل أو لحامات</a></li>
+                    <li><a href="#">تصليح وتلحيم كسور وشروخ مغاسل الرخام الصناعي</a></li>
+                    <li><a href="#">أفضل ألوان الرخام الصناعي المناسبة للمطابخ والحمامات</a></li>
+                    <li><a href="#">كيفية تنظيف مغاسل الكوريان والرخام الصناعي يومياً</a></li>
+                    <li><a href="#">هل يتأثر الرخام الصناعي بالحرارة العالية؟</a></li>
+                    <li><a href="#">مقارنة أسعار مغاسل الرخام الصناعي مقابل الرخام الطبيعي</a></li>
+                    <li><a href="#">أسباب اختيار الرخام الصناعي للمشاريع التجارية والمستشفيات</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 7 -->
+            <div class="section-card" id="sec7">
+                <h2>7. تركيب الرخام (أرضيات وجدران)</h2>
+                <ul class="articles-list">
+                    <li><a href="#">طرق تركيب أرضيات الرخام بالخلطة الأسمنتية</a></li>
+                    <li><a href="#">تركيب جدران الرخام للصالات والمداخل</a></li>
+                    <li><a href="#">خطوات تركيب الرخام الميكانيكي على الجدران</a></li>
+                    <li><a href="#">اختيار سماكة الرخام المناسبة للأرضيات والجدران</a></li>
+                    <li><a href="#">طريقة تركيب وترويب الرخام بالغوليد / الجولي</a></li>
+                    <li><a href="#">تسوية وجلي الأرضيات الرخامية بعد التركيب</a></li>
+                    <li><a href="#">تركيب فواصل النحاس والإستيل بين ألواح الرخام</a></li>
+                    <li><a href="#">حماية الرخام أثناء مرحلة التشطيبات والدهان</a></li>
+                    <li><a href="#">حل مشكلة امتصاص الرخام للرطوبة وتغير لونه</a></li>
+                    <li><a href="#">دليل أسعار مصنعية تركيب الرخام بمختلف أنواعه</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 8 -->
+            <div class="section-card" id="sec8">
+                <h2>8. تركيب واجهات الرخام والحجر</h2>
+                <ul class="articles-list">
+                    <li><a href="#">طريقة التركيب الميكانيكي للواجهات الرخامية والحجرية</a></li>
+                    <li><a href="#">مميزات التركيب الميكانيكي مقارنة بالتركيب اليدوي</a></li>
+                    <li><a href="#">أفضل أنواع الرخام والحجر المناسب لوجهات المباني</a></li>
+                    <li><a href="#">معايير أمان تثبيت التيش والزوايا في واجهات الرخام</a></li>
+                    <li><a href="#">تصميم وتنفيد واجهات رخام مودرن مع الإضاءة</a></li>
+                    <li><a href="#">طريقة عزل واجهات الرخام والحجر من الأمطار</a></li>
+                    <li><a href="#">تركيب إطارات وفريمات الرخام للشبابيك والأبواب</a></li>
+                    <li><a href="#">عزل الفواصل بين ألواح رخام الواجهات بسيلكون خاص</a></li>
+                    <li><a href="#">معالجة وتلميع واجهات الرخام القديمة</a></li>
+                    <li><a href="#">تكلفة المتر المربع لتركيب واجهات الرخام الميكانيكي</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 9 -->
+            <div class="section-card" id="sec9">
+                <h2>9. تركيب الدرج والسلالم</h2>
+                <ul class="articles-list">
+                    <li><a href="#">خطوات تركيب درج الرخام بالتفصيل (النائمة والقائمة)</a></li>
+                    <li><a href="#">طريقة تفصيل وتشكيل حواف درجات الرخام (نصف برمة)</a></li>
+                    <li><a href="#">تركيب درج البورسلان مع شرائح مانع الانزلاق</a></li>
+                    <li><a href="#">كيفية حساب مقاسات الدرج وعدد الدرجات بدقة</a></li>
+                    <li><a href="#">إضاءة الدرج المخفية: طريقة تجهيز مجرى الـ LED</a></li>
+                    <li><a href="#">تركيب رخام الدرج الداخلي للفلل والقصور</a></li>
+                    <li><a href="#">تركيب الدرج الخارجي المقاوم للانزلاق</a></li>
+                    <li><a href="#">تركيب بسطة الدرج وتنسيق العروق</a></li>
+                    <li><a href="#">صيانة وتغيير درجات الرخام المكسورة</a></li>
+                    <li><a href="#">نصائح اختيار ألوان رخام الدرج لتتناسب مع الديكور</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 10 -->
+            <div class="section-card" id="sec10">
+                <h2>10. جلي وتلميع وتأهيل الرخام</h2>
+                <ul class="articles-list">
+                    <li><a href="#">خطوات جلي الرخام بالألماس وكريستال التلميع</a></li>
+                    <li><a href="#">معالجة وتعبئة شروخ وفواصل الرخام بالجولي (Gully)</a></li>
+                    <li><a href="#">كيفية إزالة البقع المستعصية والزيوت من الرخام</a></li>
+                    <li><a href="#">طريقة تلميع الرخام المنزلي بمواد آمنة</a></li>
+                    <li><a href="#">الفرق بين جلي الرخام الطبيعي وجلي البلاط العادي</a></li>
+                    <li><a href="#">عزل حماية الرخام بعد الجلي لمنع امتصاص السوائل</a></li>
+                    <li><a href="#">استعادة لمعان ونضارة أرضيات الرخام القديمة</a></li>
+                    <li><a href="#">أفضل معدات ومكائن جلي وتلميع الأرضيات الرخامية</a></li>
+                    <li><a href="#">طريقة العناية اليومية والأسبوعية بأرضيات الرخام</a></li>
+                    <li><a href="#">أسعار خدمات جلي وتلميع الرخام لكل متر مربع</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 11 -->
+            <div class="section-card" id="sec11">
+                <h2>11. مطابخ الرخام والجرانيت</h2>
+                <ul class="articles-list">
+                    <li><a href="#">تركيب أسطح مطابخ الجرانيت والرخام (Countertops)</a></li>
+                    <li><a href="#">الفرق بين الجرانيت الطبيعي والرخام الصناعي للمطابخ</a></li>
+                    <li><a href="#">تفصيل مقاسات فتحات المغاسل ومواقد الطهي</a></li>
+                    <li><a href="#">طريقة حماية وإصلاح حواف رخام المطابخ</a></li>
+                    <li><a href="#">معالجة زوايا ولحامات سطح المطبخ الرخامي</a></li>
+                    <li><a href="#">تركيب الوزرات الرخامية الخلفية لأسطح المطابخ</a></li>
+                    <li><a href="#">أفضل أنواع الجرانيت الأسود والمخطط للمطابخ</a></li>
+                    <li><a href="#">مقاومة الرخام والجرانيت للحرارة والزيوت</a></li>
+                    <li><a href="#">تنظيف وتعقيم أسطح الرخام التي تلامس الأطعمة</a></li>
+                    <li><a href="#">خطوات تغيير وتحديث أسطح المطابخ القديمة</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 12 -->
+            <div class="section-card" id="sec12">
+                <h2>12. ديكورات وشاشات الرخام</h2>
+                <ul class="articles-list">
+                    <li><a href="#">تركيب خلفيات شاشات التلفزيون بالرخام والبورسلان</a></li>
+                    <li><a href="#">تصاميم جدران الرخام المضاءة (Backlit Marble / Onyx)</a></li>
+                    <li><a href="#">تركيب براقع وإطارات الرخام للمدافيء والديكورات</a></li>
+                    <li><a href="#">استخدام الرخام مع بديل الخشب وبديل الرخام</a></li>
+                    <li><a href="#">طريقة تركيب ألواح الأونيكس الشفافة مع إضاءة LED</a></li>
+                    <li><a href="#">دمج شرائح الاستيل الذهبي والفضي مع ديكورات الرخام</a></li>
+                    <li><a href="#">تنسيق عروق الرخام اللوحية للمجالس والمداخل</a></li>
+                    <li><a href="#">كيفية تثبيت ألواح الرخام الثقيلة على الجبس بورد</a></li>
+                    <li><a href="#">أحدث صيحات ديكورات جدران الرخام المودرن</a></li>
+                    <li><a href="#">تكلفة تنفيذ جدار رخامي ديكوري في المجلس أو الصالة</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 13 -->
+            <div class="section-card" id="sec13">
+                <h2>13. عزل وتجهيز الأرضيات</h2>
+                <ul class="articles-list">
+                    <li><a href="#">أهمية عزل حمامات ومطابخ قبل تركيب السيراميك</a></li>
+                    <li><a href="#">اختبارات جودة استواء الأرضيات قبل البدء بالتبليط</a></li>
+                    <li><a href="#">استخدام الليزر في ضبط منسوب وميول الأرضيات</a></li>
+                    <li><a href="#">أسباب ظهور التطبيل في الأرضيات وكيفية الوقاية منها</a></li>
+                    <li><a href="#">المواد المضافة للأسمنت لزيادة قوة التصاق البلاط</a></li>
+                    <li><a href="#">معالجة الرطوبة الصاعدة من الأرضيات قبل التركيب</a></li>
+                    <li><a href="#">شروط ومواصفات تسليم أعمال السيراميك والرخام</a></li>
+                    <li><a href="#">تأثير التمدد الحراري على البلاط وأهمية فواصل التمدد</a></li>
+                    <li><a href="#">تجهيز وقص الشنائف والمفتاحيات في زوايا الحمامات</a></li>
+                    <li><a href="#">كيفية استخدام الميزان القائم والقدة في فحص الجودة</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 14 -->
+            <div class="section-card" id="sec14">
+                <h2>14. أدوات ومواد التركيب والصيانة</h2>
+                <ul class="articles-list">
+                    <li><a href="#">أفضل أنواع ماكينات قص السيراميك والبورسلين</a></li>
+                    <li><a href="#">مقارنة بين أنواع غراء البلاط (C1, C2, C2TE)</a></li>
+                    <li><a href="#">أنواع الترويبة الأسمنتية والإيبوكسية ومميزاتها</a></li>
+                    <li><a href="#">أقراص وديسكات قص الرخام والبورسلان</a></li>
+                    <li><a href="#">أدوات الحماية والسلامة أثناء قص وتركيب الرخام</a></li>
+                    <li><a href="#">استخدام المضخات الشفاطة لألواح البورسلان الكبيرة</a></li>
+                    <li><a href="#">خلطات العزل المائي وتأثيرها على غراء التبليط</a></li>
+                    <li><a href="#">أفضل مواد تنظيف البلاط بعد انتهاء أعمال البناء</a></li>
+                    <li><a href="#">أنواع الملاط والأسمنت اللاصق الجاهز</a></li>
+                    <li><a href="#">العناية بالعدد والأدوات الخاصة بمعلم التركيب</a></li>
+                </ul>
+            </div>
+
+            <!-- القسم 15 -->
+            <div class="section-card" id="sec15">
+                <h2>15. الأسئلة الشائعة ونصائح الشراء</h2>
+                <ul class="articles-list">
+                    <li><a href="#">كيف تحسب كمية السيراميك والرخام المطلوبة لمنزلك؟</a></li>
+                    <li><a href="#">نسبة الهدر المتوقعة عند شراء البلاط وكيفية تقليلها</a></li>
+                    <li><a href="#">كيف تختار بين السيراميك، البورسلان، والرخام؟</a></li>
+                    <li><a href="#">نصائح هامة قبل توقيع عقد مع معلم أو شركة تركيب</a></li>
+                    <li><a href="#">الفرق بين الدرجة الأولى والدرجة الثانية في البلاط</a></li>
+                    <li><a href="#">كيف تفحص بلاط البورسلان والرخام عند الاستلام؟</a></li>
+                    <li><a href="#">هل الأفضل الشراء من المصانع المحلية أم المستورد؟</a></li>
+                    <li><a href="#">نصائح اختيار ألوان البلاط للمساحات الضيقة</a></li>
+                    <li><a href="#">أخطاء شائعة يجب تجنبها أثناء تنفيذ أعمال التبليط</a></li>
+                    <li><a href="#">دليل صيانة وتجديد أرضيات الفلل بنفسك</a></li>
+                </ul>
             </div>
 
         </div>
-    </main>
+    </div>
 
-    <!-- الأزرار العائمة (واتساب + اتصال) مع اهتزاز خفيف مستمر -->
-    <div class="floating-buttons">
-        <!-- زر الواتساب العائم -->
-        <a href="https://wa.me/966562651639" class="float-btn float-whatsapp shake-effect" target="_blank" title="تواصل عبر الواتساب">
-            <i class="fa-brands fa-whatsapp"></i>
+    <!-- قسم الأوسمة والكلمات المفتاحية SEO Cloud -->
+    <section class="seo-keywords-section" id="seoTags">
+        <div class="seo-keywords-container">
+            <h3>الكلمات الأكثر بحثاً والخدمات الشائعة</h3>
+            <div class="keywords-cloud">
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20سيراميك" class="keyword-tag">تركيب سيراميك</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20بورسلان" class="keyword-tag">تركيب بورسلان</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20بلاط" class="keyword-tag">تركيب بلاط</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20درج" class="keyword-tag">تركيب درج</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20رخام" class="keyword-tag">تركيب رخام</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20واجهة" class="keyword-tag">تركيب واجهة</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تفصيل%20مغاسل" class="keyword-tag">تفصيل مغاسل</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20مغاسل%20رخام" class="keyword-tag">مغاسل رخام</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20مغاسل%20رخام%20صناعي" class="keyword-tag">مغاسل رخام صناعي</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20مغاسل%20رخام%20طبيعي" class="keyword-tag">مغاسل رخام طبيعي</a>
+                <a href="tel:0500000000" class="keyword-tag">معلم تركيب سيراميك</a>
+                <a href="tel:0500000000" class="keyword-tag">فني تركيب بورسلان</a>
+                <a href="https://wa.me/966500000000?text=طلب%20تفصيل%20مغاسل%20مودرن" class="keyword-tag">مغاسل مودرن</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20تركيب%20رخام%20ميكانيكي" class="keyword-tag">تركيب رخام ميكانيكي</a>
+                <a href="tel:0500000000" class="keyword-tag">جلي وتلميع الرخام</a>
+                <a href="https://wa.me/966500000000?text=استفسار%20عن%20غراء%20بورسلان" class="keyword-tag">غراء بورسلان</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 - دليل خدمات ونصائح تركيب السيراميك والرخام</p>
+    </footer>
+
+    <!-- شريط الاتصال السريع الثابت بأسفل الشاشة -->
+    <div class="fixed-bottom-bar">
+        <!-- استبدل 0500000000 برقم جوالك -->
+        <a href="tel:0500000000" class="bar-btn phone">
+            <i class="fa-solid fa-phone"></i> اتصل بنا الان
         </a>
-        <!-- زر الاتصال العائم -->
-        <a href="tel:0562651639" class="float-btn float-call shake-effect" title="اتصال تلفوني">
-            <i class="fa-solid fa-phone"></i>
+        <!-- استبدل 966500000000 برقم الواتساب بالرمز الدولي بدون + -->
+        <a href="https://wa.me/966500000000?text=السلام%20عليكم،%20أرغب%20في%20الاستفسار%20عن%20خدماتكم" target="_blank" class="bar-btn whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> تواصل واتساب
         </a>
     </div>
 
+    <script>
+        // تفعيل قائمة الجوال (Hamburger Menu)
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // تفعيل فلتر البحث بين المقالات
+        function filterArticles() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+            var cards = document.getElementsByClassName('section-card');
+
+            for (var i = 0; i < cards.length; i++) {
+                var links = cards[i].getElementsByTagName('a');
+                var sectionHasMatch = false;
+
+                for (var j = 0; j < links.length; j++) {
+                    var text = links[j].innerText || links[j].textContent;
+                    if (text.toLowerCase().indexOf(filter) > -1) {
+                        links[j].parentElement.style.display = "";
+                        sectionHasMatch = true;
+                    } else {
+                        links[j].parentElement.style.display = "none";
+                    }
+                }
+
+                if (sectionHasMatch) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
